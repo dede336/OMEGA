@@ -1,0 +1,36 @@
+import { pgTable, serial, text, integer, boolean, real, timestamp } from "drizzle-orm/pg-core";
+
+export const customDigimonsTable = pgTable("custom_digimons", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  attribute: text("attribute").notNull(),
+  rarity: text("rarity").notNull(),
+  element: text("element").notNull(),
+  hp: integer("hp").notNull(),
+  mp: integer("mp").notNull(),
+  atk: integer("atk").notNull(),
+  def: integer("def").notNull(),
+  spt: integer("spt").notNull(),
+  spd: integer("spd").notNull(),
+  description: text("description").notNull().default(''),
+  attackName: text("attack_name"),
+  attackElement: text("attack_element"),
+  spiritName: text("spirit_name"),
+  spiritElement: text("spirit_element"),
+  isBaseForm: boolean("is_base_form").notNull().default(true),
+  evolvesFromId: text("evolves_from_id"),
+  requiredLevel: integer("required_level"),
+  requiredItem: text("required_item"),
+  requiredSacrificeCharacter: text("required_sacrifice_character"),
+  isFusion: boolean("is_fusion").notNull().default(false),
+  fusionPartner: text("fusion_partner"),
+  scannable: boolean("scannable").notNull().default(true),
+  isActive: boolean("is_active").notNull().default(true),
+  imageBase64: text("image_base64"),
+  imageMimeType: text("image_mime_type"),
+  imageScale: real("image_scale").notNull().default(0.8),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export type CustomDigimon = typeof customDigimonsTable.$inferSelect;
